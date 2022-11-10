@@ -8,7 +8,7 @@ docker-compose up
 docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 ```
 ```sh
-docker exec -i -t gitlab-runner gitlab-runner register `
+docker exec gitlab-runner gitlab-runner register `
     --non-interactive `
     --url http://gitlab `
     --registration-token <token> `
