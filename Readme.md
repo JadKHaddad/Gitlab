@@ -8,7 +8,8 @@ docker network create network
 ```sh
 docker-compose up
 ```
-* Username: root
+* Wait until the Gitlab instance is up and running
+* Your root username is ```root``` what a surprise!
 * Get the root password
 ```sh
 docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
@@ -41,3 +42,5 @@ job:
 * Or edit your runner to pick up untagged jobs
 * http://localhost:8080/admin/runners/:runner-id/edit
 * Check the ```Run untagged jobs``` checkbox
+
+## I wish you some successfull pipelines!
