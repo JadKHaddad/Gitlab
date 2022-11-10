@@ -43,4 +43,4 @@ job:
 * http://localhost:8080/admin/runners/:runner-id/edit
 * Check the ```Run untagged jobs``` checkbox
 
-## I wish you some successfull pipelines!
+## I wish you some successful pipelines!
