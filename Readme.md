@@ -24,6 +24,7 @@ docker exec gitlab-runner gitlab-runner register \
     --description "docker dind runner" \
     --tag-list docker \
     --executor docker \
+    --docker-host tcp://docker-deamon:2375/ \
     --docker-image alpine:latest \
     --docker-network-mode host
 ```

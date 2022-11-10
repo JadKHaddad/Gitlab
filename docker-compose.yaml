@@ -25,10 +25,12 @@ services:
     container_name: docker-deamon
     image: docker:dind
     privileged: true
-    environment:
-      - DOCKER_TLS_CERTDIR=/certs
-    volumes:
-      - ./config/deamon:/var/run
+    command: dockerd --host=tcp://0.0.0.0:2375 --host=unix:///var/run/docker.sock
+    # environment:
+    #   - DOCKER_TLS_CERTDIR=/certs
+    # volumes:
+    #   - ./config/certs/some-docker-certs-ca:/certs/ca
+    #   - ./config/certs/some-docker-certs-client:/certs/client
     networks: 
       - network
     restart: unless-stopped
@@ -36,11 +38,14 @@ services:
   gitlab-runner:
     container_name: gitlab-runner
     image: gitlab/gitlab-runner:latest
-    environment:
-      - DOCKER_TLS_CERTDIR=/certs
     volumes:
       - ./config/runner/config:/etc/gitlab-runner
-      - ./config/deamon:/var/run
+    #   - ./config/certs/some-docker-certs-client:/certs/client:ro
+    # environment:
+    #   - DOCKER_TLS_CERTDIR=/certs
     networks: 
       - network
     restart: unless-stopped
+
+# if using tls
+# in config.toml tls_verify=true and host = "tcp://docker-deamon:2376/"
