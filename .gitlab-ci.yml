@@ -1,0 +1,8 @@
+job:
+    tags:
+        - docker
+    image: "alpine:latest"
+    before_script:
+        - apk add zip
+    script:
+        - echo "Working fine!"

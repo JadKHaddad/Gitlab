@@ -27,7 +27,7 @@ docker exec gitlab-runner gitlab-runner register \
     --docker-image alpine:latest \
     --docker-network-mode host
 ```
-* Example .gitlab-ci.yml
+* Example ```.gitlab-ci.yml```
 * Don't forget to tag your jobs with `docker`
 ```yml
 job:
