@@ -1,0 +1,46 @@
+version: "3.9"
+
+networks:
+  network:
+    external: true
+    name: network
+
+services:
+  gitlab:
+    container_name: gitlab
+    image: gitlab/gitlab-ee:latest
+    networks: 
+      - network
+    volumes:
+      - ./config/gitlab/gitlab_config:/etc/gitlab
+      - ./config/gitlab/gitlab_logs:/var/log/gitlab
+      - ./config/gitlab/gitlab_data:/var/opt/gitlab
+    ports:
+      - "4443:443"
+      - "8080:80"
+      - "2222:22"
+    restart: unless-stopped
+
+  docker-deamon:
+    container_name: docker-deamon
+    image: docker:dind
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - ./config/deamon:/var/run
+    networks: 
+      - network
+    restart: unless-stopped
+
+  gitlab-runner:
+    container_name: gitlab-runner
+    image: gitlab/gitlab-runner:latest
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - ./config/runner/config:/etc/gitlab-runner
+      - ./config/deamon:/var/run
+    networks: 
+      - network
+    restart: unless-stopped
