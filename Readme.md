@@ -28,7 +28,7 @@ docker exec gitlab-runner gitlab-runner register \
     --docker-network-mode host
 ```
 * Example .gitlab-ci.yml
-* don't forget to tag your jobs with `docker`
+* Don't forget to tag your jobs with `docker`
 ```yml
 job:
     tags:
