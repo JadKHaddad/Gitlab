@@ -1,4 +1,7 @@
 ```sh
+docker network create network
+```
+```sh
 docker-compose up
 ```
 ```sh
