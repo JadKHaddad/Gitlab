@@ -8,13 +8,18 @@ docker network create network
 ```sh
 docker-compose up
 ```
+* Add gitlab.local.com to your hosts file
+```sh
+127.0.0.1 gitlab.local.com
+```
+```
 * Wait until the Gitlab instance is up and running
 * Your root username is ```root``` what a surprise!
 * Get the root password
 ```sh
 docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 ```
-* Go to http://localhost:8080/admin/runners and get yourself the registration token
+* Go to http://gitlab.local.com/admin/runners and get yourself the registration token
 * Register the runner
 ```sh
 docker exec gitlab-runner gitlab-runner register \
@@ -41,7 +46,7 @@ job:
         - echo "Working fine!"
 ```
 * Or edit your runner to pick up untagged jobs
-* http://localhost:8080/admin/runners/:runner-id/edit
+* http://gitlab.local.com/admin/runners/:runner-id/edit
 * Check the ```Run untagged jobs``` checkbox
 
 ## I wish you some successful pipelines!

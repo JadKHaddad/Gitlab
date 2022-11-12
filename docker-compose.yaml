@@ -8,16 +8,17 @@ networks:
 services:
   gitlab:
     container_name: gitlab
+    hostname: gitlab.local.com
     image: gitlab/gitlab-ee:latest
-    networks: 
+    networks:
       - network
     volumes:
       - ./config/gitlab/gitlab_config:/etc/gitlab
       - ./config/gitlab/gitlab_logs:/var/log/gitlab
       - ./config/gitlab/gitlab_data:/var/opt/gitlab
     ports:
-      - "4443:443"
-      - "8080:80"
+      - "443:443"
+      - "80:80"
       - "2222:22"
     restart: unless-stopped
 
@@ -31,7 +32,7 @@ services:
     # volumes:
     #   - ./config/certs/some-docker-certs-ca:/certs/ca
     #   - ./config/certs/some-docker-certs-client:/certs/client
-    networks: 
+    networks:
       - network
     restart: unless-stopped
 
@@ -43,9 +44,9 @@ services:
     #   - ./config/certs/some-docker-certs-client:/certs/client:ro
     # environment:
     #   - DOCKER_TLS_CERTDIR=/certs
-    networks: 
+    networks:
       - network
     restart: unless-stopped
 
 # if using tls
-# in config.toml tls_verify=true and host = "tcp://docker-deamon:2376/"
+# in config.toml tls_verify=true and host = "tcp://docker-deamon:2376/" and use network alias docker for the docker-deamon container
